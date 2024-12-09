@@ -4,3 +4,9 @@
 body{
     @apply bg-slate-200
 }
+/* Scroll bar hiddel */
+
+.scrollbar-none::-webkit-scrollbar{
+    display: none;
+}
+  

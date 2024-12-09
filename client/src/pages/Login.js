@@ -207,7 +207,7 @@ import { setUserDetails } from "../store/userSlice";
 import { toast} from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
 
-const Login = () => {
+const Login = ({setAuth}) => {
   const [data, setData] = useState({
     email: "priyanka@gmail.com",
     password: "password",
@@ -234,7 +234,7 @@ const Login = () => {
       .then(async () => {
         toast.success("Sign-In successful!");
         setData({ email: "", password: "" });
-
+        setAuth({ token: true });
         // Fetch user details after successful login
         const response = await fetch("http://localhost:4000/api/user-details", {
           method: "GET",

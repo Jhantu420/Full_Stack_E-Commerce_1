@@ -1,9 +1,10 @@
 import React from 'react'
+import CategoryList from '../components/CategoryList'
 
 function Home() {
   return (
     <div>
-      This is Home
+     <CategoryList />
     </div>
   )
 }

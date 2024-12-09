@@ -15,6 +15,7 @@ const editProductController = require("../controller/editProduct.js"); // New co
 const getProductController = require("../controller/getProducts.js");
 const getProductByIdController = require("../controller/getProductsById.js");
 const deleteProductByIdController = require("../controller/deleteProductById.js");
+const getCategoryProduct = require("../controller/getCategoryProduct.js");
 
 // Route to handle user signup
 router.post("/signup", userSignUpController);
@@ -62,6 +63,9 @@ router.get("/get-products/:id", getProductByIdController);
 // To Delete spefic product by id
 router.delete("/delete-product/:id", deleteProductByIdController);
 
+// get the product category 
+
+router.get("/get-procuctCategory", getCategoryProduct)
 
 
 module.exports = router;

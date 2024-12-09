@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Routes, Route } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
@@ -15,10 +15,12 @@ import AllUsers from "./pages/AllUsers";
 import AllProducts from "./pages/AllProducts";
 import UploadProduct from "./components/UploadProduct";
 import EditProduct from "./components/EditProduct";
+import PrivateRoutes from "./utils/PrivateRoutes";
 
 const App = () => {
   const dispatch = useDispatch();
   const userDetails = useSelector((state) => state.user.userDetails);
+  const [auth, setAuth] = useState({ token: false });
 
   // Fetch user details and update Redux store
   const fetchUserDetails = async () => {
@@ -50,19 +52,31 @@ const App = () => {
       <Header userDetails={userDetails} />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/sign-in" element={<Login />} />
+        <Route path="/sign-in" element={<Login setAuth= {setAuth} />} />
         <Route path="/forget-password" element={<ForgotPass />} />
         <Route path="/sign-up" element={<SignUp />} />
-        <Route
-          path="/admin-pannel"
-          element={<AdminPannel userDetails={userDetails} />}
-        >
-          <Route path="all-users" element={<AllUsers />} />
-          <Route path="all-products" element={<AllProducts />} />
-           
+
+        {/* Protected route */}
+
+        <Route element={<PrivateRoutes auth={auth} />}>
+          <Route
+            path="/admin-pannel"
+            element={<AdminPannel userDetails={userDetails} />}
+          >
+            <Route path="all-users" element={<AllUsers />} />
+            <Route path="all-products" element={<AllProducts />} />
+          </Route>
         </Route>
-        <Route path="/upload-product" element={<UploadProduct />} />
-        <Route path="/edit-product/:id" element={<EditProduct />} />
+        {/* Above is protected route */}
+
+        {/* Protected route */}
+
+        <Route element={<PrivateRoutes auth={auth}/>}>
+          <Route path="/upload-product" element={<UploadProduct />} />
+          <Route path="/edit-product/:id" element={<EditProduct />} />
+        </Route>
+
+        {/* Above is protected route */}
       </Routes>
       <Footer />
     </>
