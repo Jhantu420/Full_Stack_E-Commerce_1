@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 function CategoryList() {
   const [data, setData] = useState([]);
@@ -31,21 +32,21 @@ function CategoryList() {
       ) : (
         <div className="flex items-center justify-between overflow-scroll space-x-2 scrollbar-none ">
           {data.map((item, index) => (
-            <div
+            <Link to={"/category-product/"+item?.category}
               key={index}
               className="flex-shrink-0 flex flex-col items-center justify-center p-2 w-28"
             >
-              <div className="w-16 h-16 rounded-full overflow-hidden">
+              <div className="w-20 h-20 rounded-full overflow-hidden ">
                 <img
                   src={item?.imageFiles[0]}
                   alt={item.category}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-fill mix-blend-multiply"
                 />
               </div>
               <p className="text-xs font-medium mt-1 text-gray-700 capitalize">
                 {item?.category}
               </p>
-            </div>
+            </Link>
           ))}
         </div>
       )}

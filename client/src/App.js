@@ -16,6 +16,7 @@ import AllProducts from "./pages/AllProducts";
 import UploadProduct from "./components/UploadProduct";
 import EditProduct from "./components/EditProduct";
 import PrivateRoutes from "./utils/PrivateRoutes";
+import CategoryProduct from "./pages/CategoryProduct";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -55,6 +56,7 @@ const App = () => {
         <Route path="/sign-in" element={<Login setAuth= {setAuth} />} />
         <Route path="/forget-password" element={<ForgotPass />} />
         <Route path="/sign-up" element={<SignUp />} />
+        <Route path="/category-product/:category" element={<CategoryProduct />} />
 
         {/* Protected route */}
 
